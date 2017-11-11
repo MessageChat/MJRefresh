@@ -62,6 +62,8 @@
         self.scrollView.mj_insetT = insetT;
         
         self.insetTDelta = _scrollViewOriginalInset.top - insetT;
+        
+        NSLog(@"\ninsetTDelta: %@", @(self.insetTDelta));
         return;
     }
     
@@ -73,12 +75,17 @@
     // 头部控件刚好出现的offsetY
     CGFloat happenOffsetY = - self.scrollViewOriginalInset.top;
     
+    NSLog(@"\n\n---------=========----------\nhappenOffsetY:%@\n\noffsetY:%@\n---------=========----------", @(happenOffsetY), @(offsetY));
     // 如果是向上滚动到看不见头部控件，直接返回
     // >= -> >
     if (offsetY > happenOffsetY) return;
     
     // 普通 和 即将刷新 的临界点
+    
+//    当header完全显示，即将要刷新的临界点
     CGFloat normal2pullingOffsetY = happenOffsetY - self.mj_h;
+    
+    //header显示的百分比
     CGFloat pullingPercent = (happenOffsetY - offsetY) / self.mj_h;
     
     if (self.scrollView.isDragging) { // 如果正在拖拽
